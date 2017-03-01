@@ -23,24 +23,27 @@ int main(int argc, char *argv[]) {
 				break;
 			case 'l':
 				lba_start = atoi(optarg);
-                break;
-        	case 'b':
-        		bin = optarg;
-        		break;
-        	case 'v':
-        		vhd = optarg;
-        		break;
-        	case 'i':
-        		get_info(vhd);
-				printf("C/H/S = %d/%d/%d\n",GEO_GET_C(foot.geometry),
-								GEO_GET_H(foot.geometry),GEO_GET_S(foot.geometry));
-				printf("Size = %d Bytes\n",foot.orig_size);
+                		break;
+        		case 'b':
+        			bin = optarg;
+        			break;
+        		case 'v':
+        			vhd = optarg;
+        			break;
+        		case 'i':
+        			flag=0x12;
 				break;
 		} 
 	}
 	if(flag==0x11){
 		copy_bin(lba_start,bin,vhd);
 		printf("Success.\n");
+	}
+	if(flag==0x12){
+		get_info(vhd);
+		printf("C/H/S = %d/%d/%d\n",GEO_GET_C(foot.geometry),
+			GEO_GET_H(foot.geometry),GEO_GET_S(foot.geometry));
+		printf("Size = %d Bytes\n",foot.orig_size);
 	}
 	return 0;
 }
