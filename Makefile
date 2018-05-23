@@ -1,8 +1,5 @@
-install: vhdhelper.o
-	cp vhdhelper.o /usr/bin/vhdhelper
-
-vhdhelper.o: vhdhelper.c vhdhelper.h
-	gcc vhdhelper.c -o vhdhelper.o
+vhdhelper: vhdhelper.c vhdhelper.h vhduuid.c vhduuid.h
+	gcc .\vhdhelper.c .\vhduuid.c -lole32 -o vhdhelper.exe
 
 clean:
-	rm vhdhelper.o
+	rm .\vhdhelper.exe
